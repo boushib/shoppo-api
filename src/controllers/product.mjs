@@ -4,7 +4,11 @@ import { Mongo } from "../lib/mongo.mjs"
 export const getProducts = async (req, res) => {
   const mongo = await Mongo.getDB("products")
   const products = await mongo.find().toArray()
-  res.status(200).json({ products })
+  res
+    .status(200)
+    .json({
+      products: products.map((p) => ({ id: p._id, ...p, _id: undefined })),
+    })
 }
 
 export const getProduct = async (req, res) => {
