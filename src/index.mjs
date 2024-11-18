@@ -1,4 +1,5 @@
 import express from "express"
+import cors from "cors"
 import { config as envConfig } from "dotenv"
 import { productRouter, orderRouter } from "./routes/index.mjs"
 
@@ -7,6 +8,7 @@ envConfig()
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 
 app.get("/api/v1", (_, res) => {
   res.json({ message: "Shoppo API v1" })
